@@ -13,7 +13,6 @@ print("Welcome to Number Guessing!")
 # Global variables
 lives = 0  # Lives will be set in difficulty()
 number_list = random.randint(1, 100)  # Random number between 1 and 100
-print(number_list)
 print("I am thinking of a number from 1 to 100, can you guess it?")
 
 
