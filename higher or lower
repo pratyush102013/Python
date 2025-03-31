@@ -1,0 +1,69 @@
+import random
+import art
+import game_data
+print(art.logo)
+you_were_right = (True)
+current_score = 0
+random_entry = random.choice(game_data.data)# Select a random dictionary from the list
+random_entry2 = random.choice(game_data.data)
+compareA = f"Compare A: {random_entry['name']}, a {random_entry['description']}, from {random_entry['country']}"
+followerA = random_entry['follower_count']
+compareB = f"Compare B: {random_entry2['name']}, a {random_entry2['description']}, from {random_entry2['country']}"
+followerB = random_entry2["follower_count"]
+print(compareA)
+print(art.vs)
+print(compareB)
+guess = input("Who has more followers? Type 'A' or 'B':\n").lower()
+
+
+if guess == "a" and followerA > followerB:
+    you_were_right = True
+    print("Congratulations you were right!")
+    current_score += 1
+    print(f"your current score is {current_score}")
+if guess == "a" and followerA < followerB:
+    you_were_right = False
+    print("oh no you were wrong")
+    print(f"your final score was {current_score}")
+if guess == "b" and followerA > followerB:
+    you_were_right = False
+    print("oh no you were wrong")
+    print(f"your final score was {current_score}")
+if guess == "b" and followerA < followerB:
+    you_were_right = True
+    print("Congratulations you were right")
+    current_score += 1
+    print(f"your current score is {current_score}")
+while you_were_right == True:
+
+    you_were_right = (True)
+    random_entry = random.choice(game_data.data)  # Select a random dictionary from the list
+    random_entry2 = random.choice(game_data.data)
+    compareA = f"Compare A: {random_entry['name']}, a {random_entry['description']}, from {random_entry['country']}"
+    followerA = random_entry['follower_count']
+    compareB = f"Compare B: {random_entry2['name']}, a {random_entry2['description']}, from {random_entry2['country']}"
+    followerB = random_entry2["follower_count"]
+    print(compareA)
+    print(art.vs)
+    print(compareB)
+    guess = input("Who has more followers? Type 'A' or 'B':\n").lower()
+    if guess == "a" and followerA > followerB:
+        you_were_right = True
+        print("Congratulations you were right!")
+        current_score += 1
+        print(f"your current score is {current_score}")
+    if guess == "a" and followerA < followerB:
+        you_were_right = False
+        print("oh no you were wrong")
+        print(f"your final score was {current_score}")
+    if guess == "b" and followerA > followerB:
+        you_were_right = False
+        print("oh no you were wrong")
+        print(f"your final score was {current_score}")
+    if guess == "b" and followerA < followerB:
+        you_were_right = True
+        print("Congratulations you were right")
+        current_score += 1
+        print(f"your current score is {current_score}")
+if current_score >= 10:
+    print("you are a god at this game!!!")
