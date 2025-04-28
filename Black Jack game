@@ -1,0 +1,50 @@
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+import art
+import random
+def black_jack():
+    want_to_play = input("Do you want to play Black Jack, Type 'y' or 'n'\n").lower()
+    if want_to_play == "y":
+        print("\n" * 100)
+        print(art.logo)
+        pc1 = int((random.choice(cards)))
+        pc2 = (int(random.choice(cards)))
+        cc1 = (int(random.choice(cards)))
+        cc2 = (int(random.choice(cards)))
+
+
+        total_pc = pc1 + pc2
+        total_cc = int((cc1 + cc2))
+        total_cc3 = total_cc
+        if total_cc < 17:
+            cc3 = (int(random.choice(cards)))
+            total_cc3 = int(total_cc + cc3)
+        print(f"your cards are: {pc1}, {pc2}, your total score is {total_pc}")
+        print(f"computer's cards: {cc1}")
+        possible_pc3 = input(f"Do you want to get another card, Type 'y' or 'n'.").lower()
+
+        if possible_pc3 == "y":
+            pc3 = (int(random.choice(cards)))
+            total_pc = pc1+pc2+pc3
+        else:
+            print(f"ok you have {total_pc} and computer has {total_cc}")
+
+        if total_pc >= 22:
+            print("oh no you got a bust, you lose")
+            print(f"your score was {total_pc}")
+            print(f"computers score was {total_cc}")
+            print(f"computer won")
+        else:
+
+            if total_cc >= 22:
+                print(f"computer is bust and you are the winner with the score of {total_pc} and computer has score of {total_cc3}")
+
+            if total_pc > total_cc3:
+                print(f"ok your score is {total_pc} and computer's score is {total_cc3}")
+                print(f"you are the winner")
+
+    else:
+        print("ok goodbye")
+        exit()
+
+black_jack()
+

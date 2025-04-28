@@ -1,50 +1,64 @@
-from traceback import clear_frames
-import art
+import random
+
+print('''
+███╗   ██╗██╗   ██╗███╗   ███╗██████╗ ███████╗██████╗      ██████╗ ██╗   ██╗███████╗███████╗███████╗███████╗██████╗ 
+████╗  ██║██║   ██║████╗ ████║██╔══██╗██╔════╝██╔══██╗    ██╔════╝ ██║   ██║██╔════╝██╔════╝██╔════╝██╔════╝██╔══██╗
+██╔██╗ ██║██║   ██║██╔████╔██║██████╔╝█████╗  ██████╔╝    ██║  ███╗██║   ██║█████╗  ███████╗███████╗█████╗  ██████╔╝
+██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══██╗██╔══╝  ██╔══██╗    ██║   ██║██║   ██║██╔══╝  ╚════██║╚════██║██╔══╝  ██╔══██╗
+██║ ╚████║╚██████╔╝██║ ╚═╝ ██║██████╔╝███████╗██║  ██║    ╚██████╔╝╚██████╔╝███████╗███████║███████║███████╗██║  ██║
+╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝     ╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝''')
+
+print("Welcome to Number Guessing!")
+
+# Global variables
+lives = 0  # Lives will be set in difficulty()
+number_list = random.randint(1, 100)  # Random number between 1 and 100
+print("I am thinking of a number from 1 to 100, can you guess it?")
 
 
-def add(n1, n2):
-    return n1 + n2
-def subtract(n1, n2):
-    return n1 - n2
-def multiply(n1, n2):
-    return n1 * n2
-def divide(n1, n2):
-    return n1/n2
+def difficulty():
+    """Set the difficulty level by assigning the global variable `lives`."""
+    global lives
+    qdiff = input("Choose a difficulty: Type Easy or Hard\n").lower()
+    if qdiff == "easy":
+        lives = 10
+        print("You have 10 attempts remaining to guess the number.")
+    else:
+        lives = 5
+        print("You have 5 attempts remaining to guess the number.")
 
-operations = {
-    "+": add,
-    "-": subtract,
-    "*": multiply,
-    "/": divide,
-}
 
-def calculator():
-    '''Calculates numbers with operations'''
-    print(art.logo)
-    should_accumulate = True
-    while should_accumulate:
-        num1 = float(int(input("What is the first number?:\n")))
-        for symbol in operations:
-            print(symbol)
-        operation_symbol = input("Pick an operation: \n")
-        num2 = float(input("What is the next number\n"))
-        answer = operations[operation_symbol](num1, num2)
-        print(f"{num1} {operation_symbol} {num2} =   {answer}")
+def make_a_guess():
+    """Handles the guessing logic with the global `lives` variable."""
+    global lives
+    while lives > 0:
+        try:
+            guess = int(input("Make a guess: "))
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
 
-        choice = input(f"Type 'y' to continue calculation with {answer} or type 'n' to start a new calculation\n")
+        if guess == number_list:
+            print("Congratulations! You guessed the number correctly!")
+            return
 
-        if choice == "y":
-            num1 = answer
-            for symbol in operations:
-                print(symbol)
-            operation_symbol = input("Pick an operation: \n")
-            num2 = float(input("What is the next number\n"))
-            answer = operations[operation_symbol](num1, num2)
-            print(f"{num1} {operation_symbol} {num2} =   {answer}")
+        lives -= 1
+        if guess > number_list:
+            print("Your guess was too high.")
         else:
-            should_accumulate = False
-            print(art.logo)
-            print("\n" * 1000)
-            calculator()
+            print("Your guess was too low.")
 
-calculator()
+        if lives > 0:
+            print(f"Guess again! You have {lives} attempts left.")
+        else:
+            print(f"You've run out of attempts. The correct number was {number_list}. You lose!")
+
+
+def play_game():
+    """Starts the game by setting difficulty and handling guesses."""
+    difficulty()
+    make_a_guess()
+
+
+# Start the game
+play_game()
